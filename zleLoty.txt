@@ -1,0 +1,6 @@
+LO087 może się odbyć!
+FX120 nie może się odbyć! Limit pasażerów został przekroczony!
+ZZ001 może się odbyć!
+RT550 nie może się odbyć! Limit ładowności został przekroczony!
+LO001 może się odbyć!
+LO087 nie może się odbyć! Limit pasażerów został przekroczony!
