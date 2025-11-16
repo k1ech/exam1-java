@@ -13,18 +13,19 @@ public class FlightVerification {
 
     public static String readFileContent(String textFile) {
 
-        String content = "";
+        String flightInformation = "";
 
-        try {
-            Scanner scanner = new Scanner(new File(textFile));
+        try (
+                Scanner scanner = new Scanner(new File(textFile))) {
             while (scanner.hasNextLine()) {
-                content += scanner.nextLine() + "\n";
+                flightInformation += scanner.nextLine() + "\n";
             }
 
         } catch (Exception e) {
             System.out.println("Błąd podczas wczytywania pliku.");
         }
-        return content;
+
+        return flightInformation;
     }
 
     public static String checkInvalidPlanes(String fileContent) {
@@ -62,10 +63,8 @@ public class FlightVerification {
     }
 
     public static void storeToFile(String fileName, String content) {
-        try {
-            FileWriter writer = new FileWriter(fileName);
+        try (FileWriter writer = new FileWriter(fileName)) {
             writer.write(content);
-            writer.close();
 
         } catch (Exception e) {
             System.out.println("Błąd podczas zapisu do pliku.");
