@@ -11,7 +11,8 @@ public class SequenceNumbers {
         int[] sequence4 = {1, -2};
         int[] sequence5 = {1, 2, 3};
         int[] sequence7 = {1, 2, 4};
-        int[] sequence8 = {1, 2, 10};
+        int[] sequence8 = {0, 0, 0};
+        int[] sequence9 = {1, 0, 0};
 
         System.out.println(getSequenceName(sequence));
         System.out.println(getSequenceName(sequence1));
@@ -21,6 +22,7 @@ public class SequenceNumbers {
         System.out.println(getSequenceName(sequence5));
         System.out.println(getSequenceName(sequence7));
         System.out.println(getSequenceName(sequence8));
+        System.out.println(getSequenceName(sequence9));
 
     }
 
