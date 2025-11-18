@@ -8,15 +8,14 @@ public class FlightVerification {
 
     public static void main(String[] args) {
 
-        storeToFile("zleLoty.txt", checkInvalidPlanes(readFileContent("samoloty.txt")));
+        storeToFile("output/zleLoty.txt", checkInvalidPlanes(readFileContent("input/samoloty.txt")));
     }
 
     public static String readFileContent(String textFile) {
 
         String flightInformation = "";
 
-        try (
-                Scanner scanner = new Scanner(new File(textFile))) {
+        try (Scanner scanner = new Scanner(new File(textFile))) {
             while (scanner.hasNextLine()) {
                 flightInformation += scanner.nextLine() + "\n";
             }
