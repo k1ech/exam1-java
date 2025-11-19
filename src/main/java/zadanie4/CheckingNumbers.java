@@ -98,7 +98,7 @@ public class CheckingNumbers {
                 }
                 result += "Min: " + min + ", Max: " + max + "\n";
                 result += "Najpopularniejsza liczba to: " + mostFrequentNumber + "\n";
-                result += "Wszystkie naturalne między min a max: "
+                result += "Wszystkie naturalne między min agit checkout max: "
                         + (allNumbersPresent ? "TAK" : "NIE") + "\n\n";
             }
         } catch (Exception e) {
