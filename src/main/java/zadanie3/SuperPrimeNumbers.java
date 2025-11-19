@@ -6,11 +6,12 @@ public class SuperPrimeNumbers {
 
     public static void main(String[] args) {
 
-        System.out.println(Arrays.toString(superPrimes(10, 200)));
+        System.out.println(Arrays.toString(superPrimes(-10, 11)));
     }
+
     public static int[] superPrimes(int from, int to) {
 
-        int[] temp = new int[to - from + 1];
+        int[] array = new int[to - from + 1];
         int count = 0;
 
         for (int number = from; number <= to; number++) {
@@ -29,10 +30,11 @@ public class SuperPrimeNumbers {
             if (!isPrime) continue;
 
             int sum = 0;
-            int t = number;
-            while (t > 0) {
-                sum += t % 10;
-                t /= 10;
+            int tempNumber = number;
+
+            while (tempNumber > 0) {
+                sum += tempNumber % 10;
+                tempNumber /= 10;
             }
 
             boolean sumPrime = true;
@@ -45,11 +47,15 @@ public class SuperPrimeNumbers {
                     }
                 }
             }
-            if (sumPrime) temp[count++] = number;
+            if (sumPrime) {
+                array[count++] = number;
+            }
         }
+
         int[] result = new int[count];
         for (int i = 0; i < count; i++) {
-            result[i] = temp[i];
+            result[i] = array[i];
         }
         return result;
-    }}
+    }
+}

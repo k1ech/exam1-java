@@ -13,6 +13,7 @@ public class SequenceNumbers {
         int[] sequence7 = {1, 2, 4};
         int[] sequence8 = {0, 0, 0};
         int[] sequence9 = {1, 0, 0};
+        int[] sequence10 = {0, 2, 4, 8};
 
         System.out.println(getSequenceName(sequence));
         System.out.println(getSequenceName(sequence1));
@@ -23,6 +24,7 @@ public class SequenceNumbers {
         System.out.println(getSequenceName(sequence7));
         System.out.println(getSequenceName(sequence8));
         System.out.println(getSequenceName(sequence9));
+        System.out.println(getSequenceName(sequence10));
 
     }
 
@@ -51,9 +53,7 @@ public class SequenceNumbers {
                 }
             }
         } else {
-
             int constGeometric = sequence[1] / sequence[0];
-
             for (int j = 2; j < sequence.length; j++) {
                 if (sequence[j - 1] == 0) {
                     geometricSequence = false;
