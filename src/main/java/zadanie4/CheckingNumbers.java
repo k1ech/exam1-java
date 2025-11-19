@@ -34,9 +34,8 @@ public class CheckingNumbers {
                 boolean isConstant = true;
                 int min = numbers[0];
                 int max = numbers[0];
+                int maxfreq = numbers[0];
                 int max_count = 0;
-                int maxfreq = 0;
-                int count;
 
                 for (int i = 0; i < numbers.length; i++) {
 
@@ -57,8 +56,7 @@ public class CheckingNumbers {
                             isIncreasing = false;
                         }
                     }
-
-                    count = 0;
+                    int count = 0;
 
                     for (int j = 0; j < numbers.length; j++) {
                         if (numbers[i] == numbers[j]) {
@@ -69,6 +67,17 @@ public class CheckingNumbers {
                         max_count = count;
                         maxfreq = numbers[i];
                     }
+                }
+                result += Arrays.toString(numbers) + "\n";
+
+                if (isConstant) {
+                    result += "Stały\n";
+                } else if (isIncreasing) {
+                    result += "Rosnący\n";
+                } else if (isDecreasing) {
+                    result += "Malejący\n";
+                } else {
+                    result += "Mieszany\n";
                 }
 
                 boolean allNumbersPresent = true;
@@ -85,25 +94,10 @@ public class CheckingNumbers {
                     if (!found) {
                         allNumbersPresent = false;
                         break;
-
                     }
-
                 }
-
-                result += Arrays.toString(numbers) + "\n";
-
-                if (isConstant) {
-                    result += "Stały\n";
-                } else if (isIncreasing) {
-                    result += "Rosnący\n";
-                } else if (isDecreasing) {
-                    result += "Malejący\n";
-                } else {
-                    result += "Mieszany\n";
-                }
-
                 result += "Min: " + min + ", Max: " + max + "\n";
-                result += "Most Popular number:  " + maxfreq + "\n";
+                result += "Najpopularniejsza liczba to: " + maxfreq + "\n";
                 result += "Wszystkie naturalne między min i max: "
                         + (allNumbersPresent ? "TAK" : "NIE") + "\n\n";
             }
