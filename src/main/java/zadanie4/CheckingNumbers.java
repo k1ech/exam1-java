@@ -8,7 +8,7 @@ public class CheckingNumbers {
 
     public static void main(String[] args) {
 
-        System.out.println(reportAboutNumbers("liczby.txt"));
+        System.out.println(reportAboutNumbers("input_zad4/liczby.txt"));
 
     }
 

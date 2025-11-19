@@ -8,7 +8,7 @@ public class FlightVerification {
 
     public static void main(String[] args) {
 
-        storeToFile("output/zleLoty.txt", checkInvalidPlanes(readFileContent("input/samoloty.txt")));
+        storeToFile("output_zad1/zleLoty.txt", checkInvalidPlanes(readFileContent("input_zad1/samoloty.txt")));
     }
 
     public static String readFileContent(String textFile) {
