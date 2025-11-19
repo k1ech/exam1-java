@@ -34,8 +34,8 @@ public class CheckingNumbers {
                 boolean isConstant = true;
                 int min = numbers[0];
                 int max = numbers[0];
-                int maxfreq = numbers[0];
-                int max_count = 0;
+                int mostFrequentNumber = numbers[0];
+                int highestFrequency = 0;
 
                 for (int i = 0; i < numbers.length; i++) {
 
@@ -63,9 +63,9 @@ public class CheckingNumbers {
                             count++;
                         }
                     }
-                    if (count > max_count) {
-                        max_count = count;
-                        maxfreq = numbers[i];
+                    if (count > highestFrequency) {
+                        highestFrequency = count;
+                        mostFrequentNumber = numbers[i];
                     }
                 }
                 result += Arrays.toString(numbers) + "\n";
@@ -97,8 +97,8 @@ public class CheckingNumbers {
                     }
                 }
                 result += "Min: " + min + ", Max: " + max + "\n";
-                result += "Najpopularniejsza liczba to: " + maxfreq + "\n";
-                result += "Wszystkie naturalne między min i max: "
+                result += "Najpopularniejsza liczba to: " + mostFrequentNumber + "\n";
+                result += "Wszystkie naturalne między min a max: "
                         + (allNumbersPresent ? "TAK" : "NIE") + "\n\n";
             }
         } catch (Exception e) {
