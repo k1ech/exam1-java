@@ -1,5 +1,6 @@
 package zadanie2;
 
+
 public class SequenceNumbers {
 
     public static void main(String[] args) {
@@ -11,9 +12,10 @@ public class SequenceNumbers {
         int[] sequence4 = {1, -2};
         int[] sequence5 = {1, 2, 3};
         int[] sequence7 = {1, 2, 4};
-        int[] sequence8 = {0, 0, 0};
+        int[] sequence8 = {0, 0, 0}; /* tutaj ten ciąg jest geo i aryt, ale zgodnie z treścią zadania mam wypisać geo, aryt lub inny, więc tutaj sprawdzanie arytmetyczności jest pierwsze,
+        więc wypisze arytmetyczny */
         int[] sequence9 = {1, 0, 0};
-        int[] sequence10 = {0, 2, 4, 8};
+        int[] sequence10 = {5, 4, 3, 2, 1};
 
         System.out.println(getSequenceName(sequence));
         System.out.println(getSequenceName(sequence1));
@@ -30,21 +32,30 @@ public class SequenceNumbers {
 
     public static String getSequenceName(int[] sequence) {
 
-        boolean arithmeticSequence = true;
-        boolean geometricSequence = true;
-
         if (sequence.length < 3) {
             return "ABY OKREŚLIĆ CIĄG TABLICA MUSI ZAWIERAĆ PRZYNAJMNIEJ 3 ELEMENTY";
         }
 
+        boolean arithmeticSequence = isArithmetic(sequence);
+        boolean geometricSequence = isGeometric(sequence);
+
+        if (arithmeticSequence) return "ARYTMETYCZNY";
+        if (geometricSequence) return "GEOMETRYCZNY";
+
+        return "INNY";
+    }
+    private static boolean isArithmetic(int[] sequence) {
+
         int constArithmetical = sequence[1] - sequence[0];
 
         for (int i = 2; i < sequence.length; i++) {
-            if (sequence[i] - sequence[i - 1] != constArithmetical) {
-                arithmeticSequence = false;
-                break;
-            }
+            if (sequence[i] - sequence[i - 1] != constArithmetical) return false;
         }
+        return true;
+    }
+    private static boolean isGeometric(int[] sequence) {
+        boolean geometricSequence = true;
+
         if (sequence[0] == 0) {
             for (int i = 1; i < sequence.length; i++) {
                 if (sequence[i] != 0) {
@@ -52,22 +63,22 @@ public class SequenceNumbers {
                     break;
                 }
             }
-        } else {
-            int constGeometric = sequence[1] / sequence[0];
-            for (int j = 2; j < sequence.length; j++) {
-                if (sequence[j - 1] == 0) {
-                    geometricSequence = false;
-                    break;
-                }
-                if (sequence[j] / sequence[j - 1] != constGeometric) {
-                    geometricSequence = false;
-                    break;
-                }
+            return geometricSequence;
+        }
+
+        for (int i = 1; i < sequence.length; i++) {
+            if (sequence[i] == 0) return false;
+        }
+
+        double constGeometric = (double) sequence[1] / sequence[0];
+
+        for (int j = 2; j < sequence.length; j++) {
+            if (sequence[j - 1] == 0) return false;
+            if ((double) sequence[j] / sequence[j - 1] != constGeometric) {
+                geometricSequence = false;
+                break;
             }
         }
-        if (arithmeticSequence) return "ARYTMETYCZNY";
-        if (geometricSequence) return "GEOMETRYCZNY";
-        return "INNY";
+        return geometricSequence;
     }
-
 }

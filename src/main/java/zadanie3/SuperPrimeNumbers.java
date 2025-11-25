@@ -6,7 +6,7 @@ public class SuperPrimeNumbers {
 
     public static void main(String[] args) {
 
-        System.out.println(Arrays.toString(superPrimes(-10, 11)));
+        System.out.println(Arrays.toString(superPrimes(-20, 40)));
     }
 
     public static int[] superPrimes(int from, int to) {
@@ -15,39 +15,7 @@ public class SuperPrimeNumbers {
         int count = 0;
 
         for (int number = from; number <= to; number++) {
-
-            boolean isPrime = true;
-
-            if (number < 2) isPrime = false;
-            else {
-                for (int i = 2; i * i <= number; i++) {
-                    if (number % i == 0) {
-                        isPrime = false;
-                        break;
-                    }
-                }
-            }
-            if (!isPrime) continue;
-
-            int sum = 0;
-            int tempNumber = number;
-
-            while (tempNumber > 0) {
-                sum += tempNumber % 10;
-                tempNumber /= 10;
-            }
-
-            boolean sumPrime = true;
-            if (sum < 2) sumPrime = false;
-            else {
-                for (int i = 2; i * i <= sum; i++) {
-                    if (sum % i == 0) {
-                        sumPrime = false;
-                        break;
-                    }
-                }
-            }
-            if (sumPrime) {
+            if (isSuperPrime(number)) {
                 array[count++] = number;
             }
         }
@@ -57,5 +25,29 @@ public class SuperPrimeNumbers {
             result[i] = array[i];
         }
         return result;
+    }
+
+    private static boolean isSuperPrime(int number) {
+        if (!isPrime(number)) return false;
+        int sum = digitSum(number);
+        return isPrime(sum);
+    }
+
+    private static boolean isPrime(int number) {
+        if (number < 2) return false;
+        for (int i = 2; i * i <= number; i++) {
+            if (number % i == 0) return false;
+        }
+        return true;
+    }
+
+    private static int digitSum(int number) {
+        if (number < 0) number = -number;
+        int sum = 0;
+        while (number > 0) {
+            sum += number % 10;
+            number /= 10;
+        }
+        return sum;
     }
 }

@@ -21,90 +21,113 @@ public class CheckingNumbers {
             while (scanner.hasNextLine()) {
 
                 String line = scanner.nextLine().trim();
-                String[] parts = line.split(" ");
+                int[] numbers = parseLineToIntArray(line);
 
-                int[] numbers = new int[parts.length];
+                boolean isConstant = isConstant(numbers);
+                boolean isIncreasing = isIncreasing(numbers);
+                boolean isDecreasing = isDecreasing(numbers);
 
-                for (int i = 0; i < numbers.length; i++) {
-                    numbers[i] = Integer.parseInt(parts[i]);
-                }
+                int min = getMin(numbers);
+                int max = getMax(numbers);
+                int mostFrequentNumber = getMostFrequent(numbers);
+                boolean allNumbersPresent = areAllNumbersPresent(numbers, min, max);
 
-                boolean isIncreasing = true;
-                boolean isDecreasing = true;
-                boolean isConstant = true;
-                int min = numbers[0];
-                int max = numbers[0];
-                int mostFrequentNumber = numbers[0];
-                int highestFrequency = 0;
-
-                for (int i = 0; i < numbers.length; i++) {
-
-                    if (max < numbers[i]) {
-                        max = numbers[i];
-                    }
-                    if (min > numbers[i]) {
-                        min = numbers[i];
-                    }
-                    if (i < numbers.length - 1) {
-                        if (numbers[i] != numbers[i + 1]) {
-                            isConstant = false;
-                        }
-                        if (numbers[i + 1] > numbers[i]) {
-                            isDecreasing = false;
-                        }
-                        if (numbers[i] > numbers[i + 1]) {
-                            isIncreasing = false;
-                        }
-                    }
-                    int count = 0;
-
-                    for (int j = 0; j < numbers.length; j++) {
-                        if (numbers[i] == numbers[j]) {
-                            count++;
-                        }
-                    }
-                    if (count > highestFrequency) {
-                        highestFrequency = count;
-                        mostFrequentNumber = numbers[i];
-                    }
-                }
                 result += Arrays.toString(numbers) + "\n";
 
-                if (isConstant) {
-                    result += "Stały\n";
-                } else if (isIncreasing) {
-                    result += "Rosnący\n";
-                } else if (isDecreasing) {
-                    result += "Malejący\n";
-                } else {
-                    result += "Mieszany\n";
-                }
+                if (isConstant) result += "Stały\n";
+                else if (isIncreasing) result += "Rosnący\n";
+                else if (isDecreasing) result += "Malejący\n";
+                else result += "Mieszany\n";
 
-                boolean allNumbersPresent = true;
-
-                for (int numberToCheck = min; numberToCheck <= max; numberToCheck++) {
-                    boolean found = false;
-
-                    for (int i = 0; i < numbers.length; i++) {
-                        if (numbers[i] == numberToCheck) {
-                            found = true;
-                            break;
-                        }
-                    }
-                    if (!found) {
-                        allNumbersPresent = false;
-                        break;
-                    }
-                }
                 result += "Min: " + min + ", Max: " + max + "\n";
                 result += "Najpopularniejsza liczba to: " + mostFrequentNumber + "\n";
-                result += "Wszystkie naturalne między min agit checkout max: "
-                        + (allNumbersPresent ? "TAK" : "NIE") + "\n\n";
+                result += "Wszystkie naturalne między min a max: " +
+                        (allNumbersPresent ? "TAK" : "NIE") + "\n\n";
             }
+
         } catch (Exception e) {
             System.out.println("Błąd podczas wczytywania pliku.");
         }
+
         return result;
+    }
+
+    private static int[] parseLineToIntArray(String line) {
+        String[] parts = line.split(" ");
+        int[] numbers = new int[parts.length];
+        for (int i = 0; i < parts.length; i++) {
+            numbers[i] = Integer.parseInt(parts[i]);
+        }
+        return numbers;
+    }
+
+    private static boolean isConstant(int[] numbers) {
+        for (int i = 0; i < numbers.length - 1; i++) {
+            if (numbers[i] != numbers[i + 1]) return false;
+        }
+        return true;
+    }
+
+    private static boolean isIncreasing(int[] numbers) {
+        for (int i = 0; i < numbers.length - 1; i++) {
+            if (numbers[i] > numbers[i + 1]) return false;
+        }
+        return true;
+    }
+
+    private static boolean isDecreasing(int[] numbers) {
+        for (int i = 0; i < numbers.length - 1; i++) {
+            if (numbers[i] < numbers[i + 1]) return false;
+        }
+        return true;
+    }
+
+    private static int getMin(int[] numbers) {
+        int min = numbers[0];
+        for (int n : numbers) {
+            if (n < min) min = n;
+        }
+        return min;
+    }
+
+    private static int getMax(int[] numbers) {
+        int max = numbers[0];
+        for (int n : numbers) {
+            if (n > max) max = n;
+        }
+        return max;
+    }
+
+    private static int getMostFrequent(int[] numbers) {
+        int mostFrequent = numbers[0];
+        int highestCount = 0;
+
+        for (int i = 0; i < numbers.length; i++) {
+            int count = 0;
+            for (int j = 0; j < numbers.length; j++) {
+                if (numbers[i] == numbers[j]) count++;
+            }
+            if (count > highestCount) {
+                highestCount = count;
+                mostFrequent = numbers[i];
+            }
+        }
+
+        return mostFrequent;
+    }
+
+    private static boolean areAllNumbersPresent(int[] numbers, int min, int max) {
+        for (int value = min; value <= max; value++) {
+            boolean found = false;
+            for (int n : numbers) {
+                if (n == value) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) return false;
+        }
+        return true;
     }
 }
 
